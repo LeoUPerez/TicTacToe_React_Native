@@ -1,11 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Alert, Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { ContexProvider, arr, globalContext } from "../context/GlobalContext";
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { arr, globalContext } from "../context/GlobalContext";
 
 type PropsType = {
-   value: string,
-   indexPos: number
-}
+  value: string;
+  indexPos: number;
+};
 
 export const BoxTable = (props: PropsType) => {
   const Context = useContext(globalContext);
@@ -18,16 +23,18 @@ export const BoxTable = (props: PropsType) => {
 
   return (
     <TouchableOpacity
+      style={styles.BoxStyle}
       onPress={async () => {
         if (Value == "") {
           setValue(await Context?.turn(props.indexPos));
-        }else{
-          Alert.alert("Alerta", "Digita en otro lao' que aquí no se puede XD")
+        } else {
+          Alert.alert("Alerta", "Digita en otro lao' que aquí no se puede XD");
         }
       }}
-      style={styles.BoxStyle}
     >
-      <Text style={{ color: "black" }}>{arr[props.indexPos]}</Text>
+      <Text style={Value == "X" ? styles.StyleX : styles.StyleO}>
+        {arr[props.indexPos]}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -38,7 +45,16 @@ const styles = StyleSheet.create({
     height: 100,
     display: "flex",
     justifyContent: "center",
+    backgroundColor: "white",
     alignItems: "center",
-    borderWidth: .7
+    borderRadius: 15
+  },
+  StyleX: {
+    fontSize: 30,
+    color: "rgba(0, 0, 255, 0.7)",
+  },
+  StyleO: {
+    fontSize: 30,
+    color: "rgba(224, 112, 56, 0.9)",
   },
 });
