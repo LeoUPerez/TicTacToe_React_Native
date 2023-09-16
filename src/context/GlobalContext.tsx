@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { winningCombo } from "../common/winningCombo";
+import { Alert } from "react-native";
 
 export let arr: string[] = ["", "", "", "", "", "", "", "", ""];
 
@@ -65,11 +66,11 @@ export const ContexProvider = ({ children }: ContextProviderProps) => {
       }
 
       if (winnerX == 2) {
-        console.log("Gano X");
+        Alert.alert("Tic Tac Toe Alert", "Gano X");
         clear();
       }
       if (winnerO == 2) {
-        console.log("Gano O");
+        Alert.alert("Tic Tac Toe Alert", "Gano O");
         clear();
       }
       winnerX = 0;
