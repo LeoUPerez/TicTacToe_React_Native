@@ -8,12 +8,7 @@ type PropsType = {
 
 export default function TextTitle (props: PropsType) {
   return (
-        <Text style={styles.defaultStyle}>{props.Text}</Text>
+        <Text>{props.Text}</Text>
     )
 }
 
-const styles = StyleSheet.create({
-    defaultStyle: {
-        // color: 
-    }
-})
