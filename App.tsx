@@ -1,12 +1,12 @@
-import { ContexProvider } from "./src/context/GlobalContext";
-import HomeView from "./src/views/HomeView";
+import Home from "./src/views/Home/Home";
+import {ContextProvider} from "./src/context/GlobalContext";
 
 export default function App() {
 
-  return (
-    <ContexProvider>
-      <HomeView></HomeView>
-    </ContexProvider>
-  );
-}
+    return (
+        <ContextProvider>
+            <Home></Home>
+        </ContextProvider>
+    );
+};
 
