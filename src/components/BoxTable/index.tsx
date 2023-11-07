@@ -14,8 +14,8 @@ export default function BoxTable(props: PropsType) {
 
     useEffect(() => {
         setValue("");
-        Context.setClear(false);
-    }, [Context.Clear, arr]);
+        Context.clear();
+    }, [Context.Clear]);
 
     return (
         <TouchableOpacity

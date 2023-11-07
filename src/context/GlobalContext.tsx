@@ -26,15 +26,10 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
     const [ValueBox, setValueBox] = useState("");
     const [Clear, setClear] = useState(Boolean);
     const [turnBox, setTurnBox] = useState(true);
+    const [winner, setWinner] = useState<boolean | undefined>(undefined);
+    const [touches, setTouches] = useState(0)
 
-    const clear = () => {
-        setValueBox("");
-        setClear(true);
-        setTurnBox(true);
-        arr = ["", "", "", "", "", "", "", "", ""];
-    };
-
-    const Turn = (indexPosition: number): string => {
+    function Turn(indexPosition: number): string {
         if (turnBox) {
             setTurnBox(false);
             arr[indexPosition] = "X";
@@ -44,9 +39,9 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
         }
         validator();
         return arr[indexPosition];
-    };
+    }
 
-    const validator = async () => {
+    function validator() {
         winnerX = 0;
         winnerO = 0;
 
@@ -66,17 +61,36 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             }
 
             if (winnerX == 2) {
-                Alert.alert("Tic Tac Toe Alert", "Won X");
-                clear();
+                AlertWinner("Won X")
+                setWinner(true);
+            } else if (winnerO == 2) {
+                AlertWinner("Won O")
+                setWinner(true);
             }
-            if (winnerO == 2) {
-                Alert.alert("Tic Tac Toe Alert", "Won O");
-                clear();
-            }
+
             winnerX = 0;
             winnerO = 0;
         }
-    };
+        setTouches(touches + 1);
+
+        if (touches == 8 && winner == undefined) {
+            Alert.alert("Tic Tac Toe Alert", "Draw");
+            setClear(!Clear);
+        }
+    }
+
+    function AlertWinner(winner: string) {
+        Alert.alert("Tic Tac Toe Alert", winner);
+        setClear(!Clear);
+    }
+
+    function clear() {
+        setWinner(undefined);
+        setTouches(0);
+        setValueBox("");
+        setTurnBox(true);
+        arr = ["", "", "", "", "", "", "", "", ""];
+    }
 
     return (
         <globalContext.Provider
