@@ -9,18 +9,18 @@ let winnerO: number = 0;
 
 export const globalContext = createContext({} as ContextType);
 
-type ContextProviderProps = {
+interface ContextProviderProps {
     children: ReactNode;
-};
+}
 
-type ContextType = {
+interface ContextType {
     Turn: (indexPosition: number) => string;
     clear: () => void;
     ValueBox: string;
     setClear: Dispatch<SetStateAction<boolean>>;
     Clear: Boolean;
     turnBox: Boolean;
-};
+}
 
 export const ContextProvider = ({children}: ContextProviderProps) => {
     const [ValueBox, setValueBox] = useState("");

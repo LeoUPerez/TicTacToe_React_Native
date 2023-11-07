@@ -3,10 +3,11 @@ import {arr, globalContext} from "../../context/GlobalContext";
 import {Alert, Text, TouchableOpacity} from "react-native";
 import {styles} from "./style";
 
-type PropsType = {
+interface PropsType {
     value: string;
     indexPos: number;
-};
+}
+
 export default function BoxTable(props: PropsType) {
     const Context = useContext(globalContext);
     const [Value, setValue] = useState(Context.ValueBox);
