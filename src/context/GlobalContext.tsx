@@ -15,16 +15,16 @@ interface ContextProviderProps {
 
 interface ContextType {
     Turn: (indexPosition: number) => string;
-    clear: () => void;
-    ValueBox: string;
-    setClear: Dispatch<SetStateAction<boolean>>;
-    Clear: Boolean;
+    Clear: () => void;
+    valueBox: string;
+    setClearStatus: Dispatch<SetStateAction<boolean>>;
+    clearStatus: Boolean;
     turnBox: Boolean;
 }
 
 export const ContextProvider = ({children}: ContextProviderProps) => {
-    const [ValueBox, setValueBox] = useState("");
-    const [Clear, setClear] = useState(Boolean);
+    const [valueBox, setValueBox] = useState("");
+    const [clearStatus, setClearStatus] = useState(Boolean);
     const [turnBox, setTurnBox] = useState(true);
     const [winner, setWinner] = useState<boolean | undefined>(undefined);
     const [touches, setTouches] = useState(0)
@@ -42,8 +42,6 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
     }
 
     function validator() {
-        winnerX = 0;
-        winnerO = 0;
 
         for (let i = 0; i < winningCombo.length; i++) {
             for (let j = 0; j < 3; j++) {
@@ -75,16 +73,16 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
 
         if (touches == 8 && winner == undefined) {
             Alert.alert("Tic Tac Toe Alert", "Draw");
-            setClear(!Clear);
+            setClearStatus(!clearStatus);
         }
     }
 
     function AlertWinner(winner: string) {
         Alert.alert("Tic Tac Toe Alert", winner);
-        setClear(!Clear);
+        setClearStatus(!clearStatus);
     }
 
-    function clear() {
+    function Clear() {
         setWinner(undefined);
         setTouches(0);
         setValueBox("");
@@ -94,7 +92,7 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
 
     return (
         <globalContext.Provider
-            value={{Turn, clear, ValueBox, setClear, Clear, turnBox}}
+            value={{Turn, Clear, valueBox, setClearStatus, clearStatus, turnBox}}
         >
             {children}
         </globalContext.Provider>
