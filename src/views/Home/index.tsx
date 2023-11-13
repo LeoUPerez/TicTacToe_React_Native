@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useContext} from "react";
 import {arr, globalContext} from "../../context/GlobalContext";
 import {styles} from "./style";
@@ -30,6 +30,11 @@ export default function Home() {
                     <BoxTable key={index} indexPos={index} value={element}/>
                 ))}
             </View>
+            <TouchableOpacity style={styles.btnReset} onPress={()=> Context.setClearStatus(true)}>
+                <Text style={styles.textReset}>
+                    Reset
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }

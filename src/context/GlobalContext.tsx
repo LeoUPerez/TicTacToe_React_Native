@@ -24,7 +24,7 @@ interface ContextType {
 
 export const ContextProvider = ({children}: ContextProviderProps) => {
     const [valueBox, setValueBox] = useState("");
-    const [clearStatus, setClearStatus] = useState(Boolean);
+    const [clearStatus, setClearStatus] = useState<boolean>(false);
     const [turnBox, setTurnBox] = useState(true);
     const [winner, setWinner] = useState<boolean | undefined>(undefined);
     const [touches, setTouches] = useState(0)
@@ -73,13 +73,13 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
 
         if (touches == 8 && winner == undefined) {
             Alert.alert("Tic Tac Toe Alert", "Draw");
-            setClearStatus(!clearStatus);
+            setClearStatus(true);
         }
     }
 
     function AlertWinner(winner: string) {
         Alert.alert("Tic Tac Toe Alert", winner);
-        setClearStatus(!clearStatus);
+        setClearStatus(true);
     }
 
     function Clear() {
@@ -87,6 +87,7 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
         setTouches(0);
         setValueBox("");
         setTurnBox(true);
+        setClearStatus(false);
         arr = ["", "", "", "", "", "", "", "", ""];
     }
 

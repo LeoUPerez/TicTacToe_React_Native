@@ -10,12 +10,12 @@ interface PropsType {
 
 export default function BoxTable(props: PropsType) {
     const Context = useContext(globalContext);
-    const [Value, setValue] = useState(Context.ValueBox);
+    const [Value, setValue] = useState(Context.valueBox);
 
     useEffect(() => {
         setValue("");
-        Context.clear();
-    }, [Context.Clear]);
+        Context.Clear();
+    }, [Context.clearStatus]);
 
     return (
         <TouchableOpacity

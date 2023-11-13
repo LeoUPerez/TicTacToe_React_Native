@@ -29,4 +29,19 @@ export const styles = StyleSheet.create({
     turnO: {
         color: "rgba(224, 112, 56, 0.9)"
     },
+    btnReset: {
+        width: 200,
+        height: 50,
+        backgroundColor: "red",
+        borderRadius: 10,
+        marginTop: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    textReset: {
+        color: "white",
+        fontSize: 18,
+        fontWeight: "bold",
+    }
 });
