@@ -1,4 +1,4 @@
-import {createContext, Dispatch, ReactNode, SetStateAction, useState} from "react";
+import {createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState} from "react";
 import {winningCombo} from "../common/winningCombo";
 import {Alert} from "react-native";
 
@@ -27,7 +27,14 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
     const [clearStatus, setClearStatus] = useState<boolean>(false);
     const [turnBox, setTurnBox] = useState(true);
     const [winner, setWinner] = useState<boolean | undefined>(undefined);
-    const [touches, setTouches] = useState(0)
+    const [touches, setTouches] = useState(0);
+
+    useEffect(() => {
+        if (winner == undefined && touches == 9) {
+            Alert.alert("Tic Tac Toe Alert", "Draw");
+            setClearStatus(true);
+        }
+    }, [touches]);
 
     function Turn(indexPosition: number): string {
         if (turnBox) {
@@ -59,10 +66,14 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
             }
 
             if (winnerX == 2) {
-                AlertWinner("Won X")
+                setTimeout(() => {
+                    AlertWinner("Won X")
+                }, 200);
                 setWinner(true);
             } else if (winnerO == 2) {
-                AlertWinner("Won O")
+                setTimeout(() => {
+                    AlertWinner("Won O")
+                }, 200);
                 setWinner(true);
             }
 
@@ -71,10 +82,6 @@ export const ContextProvider = ({children}: ContextProviderProps) => {
         }
         setTouches(touches + 1);
 
-        if (touches == 8 && winner == undefined) {
-            Alert.alert("Tic Tac Toe Alert", "Draw");
-            setClearStatus(true);
-        }
     }
 
     function AlertWinner(winner: string) {
